@@ -1,10 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	request.setCharacterEncoding("UTF-8");
 
-	String userId = (String)session.getAttribute("userId");
-	System.out.println((String)session.getAttribute("userId"));
 %>
 <!DOCTYPE html>
 <html>
@@ -20,9 +19,9 @@
 	
 	<a href="BoardList.bo">게시판으로 가기</a><br><br>
 		
-	<% if(userId.equals("ADMIN")) {%>
+	<c:if test="${userId == 'ADMIN'}">
 		<a href="Member_list.me">관리자만 보이는 링크</a>
-	<%} %>
+	</c:if>
 </div>
 </body>
 </html>

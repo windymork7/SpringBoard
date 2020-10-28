@@ -3,7 +3,9 @@ package kr.co.DAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
@@ -15,9 +17,10 @@ public class MemberDAO
 {
 	public JdbcTemplate template;
 	
+	@Autowired
 	public MemberDAO()
 	{
-		template = Constant.template;
+		this.template = Constant.template;
 	}
 	
 
@@ -51,12 +54,38 @@ public class MemberDAO
 	}
 	
 	// 로그인
-	public boolean login(String userId) 
+	public String login(String userId) 
 	{
 		String sql = "SELECT USERPW FROM MEMBERINFORMATION WHERE USERID = ?";
-//		template.query(sql, );
 		
-		return false;
+		// 스프링 4 버전 사용가능
+		return template.queryForObject(sql, String.class, userId);
 	}
+	
+	
+	// 전체 회원조회
+	public List<String> memberLookup()
+	{
+		String sql = "SELECT USERID FROM MEMBERINFORMATION";
+		
+		return template.queryForList(sql, String.class);
+	}
+	
+	// 회원 정보 출력
+	public MemberDTO memberInfo(String userId)
+	{
+		String sql = "SELECT * FROM MEMBERINFORMATION WHERE USERID = '"+userId+"'";
+		
+		return template.queryForObject(sql, new BeanPropertyRowMapper<MemberDTO>(MemberDTO.class));
+	}
+	
+	
+	// 회원 삭제
+	public void memberDelete(String userId)
+	{
+		String sql = "DELETE FROM MEMBERINFORMATION WHERE USERID = '"+ userId + "'";
+		template.update(sql);
+	}
+	
 	
 }

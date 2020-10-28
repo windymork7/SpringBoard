@@ -26,6 +26,8 @@
 <script src="js/joinvali.js"></script>
 <script src="js/mapApi.js"></script> -->
 <body>
+
+
 <form name="join" action="updateProcess.jsp" method="post">
    <div align="center">
       <table>
@@ -35,31 +37,31 @@
          <tr>
             <td align="center">아이디 : </td>
             <td>
-               <input type="text" id="userId" name="userId" value="" readonly="readonly">4~12자의 영문 대소문자와 숫자로만 입력
+               <input type="text" id="userId" name="userId" value="${Member.userId }" readonly="readonly">4~12자의 영문 대소문자와 숫자로만 입력
             </td>
          </tr>
          <tr>
             <td align="center">비밀번호 : </td>
             <td>
-               <input type="password" id=userPw name="userPw" value="" readonly="readonly">4~12자의 영문 대소문자와 숫자로만 입력
+               <input type="password" id=userPw name="userPw" value="${Member.userPw }" readonly="readonly">4~12자의 영문 대소문자와 숫자로만 입력
             </td>
          </tr>
          <tr>
             <td align="center">비밀번호 확인 : </td>
             <td>
-               <input type="password" id=userPwConfirm name="userPwConfirm" value="" readonly="readonly">
+               <input type="password" id=userPwConfirm name="userPwConfirm" value="${Member.userPw }" readonly="readonly">
             </td>
          </tr>
          <tr>
             <td align="center">메일주소 : </td>
             <td>
-               <input type="email" id="userMail" name="userMail" value="" readonly="readonly">예) id@domain.com
+               <input type="email" id="userMail" name="userMail" value="${Member.userMail }" readonly="readonly">예) id@domain.com
             </td>
          </tr>
          <tr>
             <td align="center">이름 : </td>
             <td>
-               <input type="text" id="userName" name="userName" value="" readonly="readonly">
+               <input type="text" id="userName" name="userName" value="${Member.userName }" readonly="readonly">
             </td>
          </tr>
          <tr>
@@ -68,18 +70,18 @@
          <tr>
          	<td align="center">우편번호 : </td>
          	<td>
-         		<input type="text" id="Postal code" name="PostalCode" value="" readonly="readonly">
+         		<input type="text" id="Postal code" name="PostalCode" value="${Member.postalCode }" readonly="readonly">
          		<button type="button" onclick="sample4_execDaumPostcode()">&nbsp;우편번호검색</button><br>
-         		<input type="text" id="Road address" name="RoadAddress" value="" readonly="readonly">&nbsp;
-         		<input type="text" id="branch address" name="branchAddress" value="" readonly="readonly"><br>
-         		<input type="text" id="sub address" name="subAddress" value="" readonly="readonly">
+         		<input type="text" id="Road address" name="RoadAddress" value="${Member.roadAddress }" readonly="readonly">&nbsp;
+         		<input type="text" id="branch address" name="branchAddress" value="${Member.branchAddress }" readonly="readonly"><br>
+         		<input type="text" id="sub address" name="subAddress" value="${Member.subAddress }" readonly="readonly">
          	</td>
          </tr>
          <tr>
             <td align="center">주민등록번호 : </td>
             <td>
-               <input type="text" id="jubun1" name="jubun1" style="width: 72px;" maxlength="6" value="" readonly="readonly"> -
-               <input type="password" id="jubun2" name="jubun2" style="width: 72px;" maxlength="7" value="" readonly="readonly"> 예) 123456-1234567
+               <input type="text" id="jubun1" name="jubun1" style="width: 72px;" maxlength="6" value="${Member.jubun1 }" readonly="readonly"> -
+               <input type="password" id="jubun2" name="jubun2" style="width: 72px;" maxlength="7" value="${Member.jubun2 }" readonly="readonly"> 예) 123456-1234567
             </td>
          </tr>
          <tr>
@@ -93,13 +95,13 @@
          <tr>
             <td align="center">관심분야 : </td>
             <td>
-            	<input type="text" name="hobby" value="" readonly="readonly">
+            	<input type="text" name="hobby" value="${Member.hobby }" readonly="readonly">
             </td>
          </tr>
          <tr>
             <td align="center">자기소개 : </td>
             <td>
-               <textarea id="intro" name="intro" style="width: 450px; height: 200px; resize: none; readonly="readonly"></textarea>
+               <textarea id="intro" name="intro" style="width: 450px; height: 200px; resize: none; readonly="readonly">${Member.intro }</textarea>
             </td>
          </tr>
          <tr>

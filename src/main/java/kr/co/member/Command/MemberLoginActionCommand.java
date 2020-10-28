@@ -3,6 +3,7 @@ package kr.co.member.Command;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
 
@@ -15,15 +16,16 @@ public class MemberLoginActionCommand implements Command
 	{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
+		HttpSession session = request.getSession();
 		
 		String userId = request.getParameter("userId");
-		
+		String userPw = request.getParameter("userPw");
 		
 		MemberDAO memberDAO = new MemberDAO();
-		memberDAO.login(userId);
+		String userPw2 = memberDAO.login(userId);
 		
-		
-		
+		if (userPw.equals(userPw2))
+			session.setAttribute("userId", userId);
 		
 	}
 }

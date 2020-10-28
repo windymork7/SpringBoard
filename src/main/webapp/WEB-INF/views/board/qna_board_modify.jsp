@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"%>
 <%@ page import="net.board.db.*" %>
 <%
-	BoardBean board = (BoardBean)request.getAttribute("boarddata");
+	BoardDTO board = (BoardDTO)request.getAttribute("boarddata");
 %>
 
 <html>

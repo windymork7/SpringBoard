@@ -7,7 +7,7 @@
 <title>MVC °Ô½ÃÆÇ</title>
 </head>
 <body>
-<form name="deleteForm" action="./BoardDeleteAction.bo?num=<%=num %>" 
+<form name="deleteForm" action="./BoardDeleteAction.bo?num=${num }" 
 	method="post">
 <table border=1>
 <tr>

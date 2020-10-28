@@ -1,114 +1,121 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
 <%@ page import="java.text.SimpleDateFormat" %>
-<%@ page import="net.board.db.*" %>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
-	List boardList=(List)request.getAttribute("boardlist");
-	int listcount=((Integer)request.getAttribute("listcount")).intValue();
-	int nowpage=((Integer)request.getAttribute("page")).intValue();
-	int maxpage=((Integer)request.getAttribute("maxpage")).intValue();
-	int startpage=((Integer)request.getAttribute("startpage")).intValue();
-	int endpage=((Integer)request.getAttribute("endpage")).intValue();
+	request.setCharacterEncoding("UTF-8");
 %>
 
 <html>
 <head>
-	<title>MVC °Ô½ÃÆÇ</title>
+	<title>MVC ê²Œì‹œíŒ</title>
 </head>
 
 <body>
-<!-- °Ô½ÃÆÇ ¸®½ºÆ® -->
+
+
+<!-- ê²Œì‹œíŒ ë¦¬ìŠ¤íŠ¸ -->
 <table width=50% border="0" cellpadding="0" cellspacing="0">
 	<tr align="center" valign="middle">
-		<td colspan="4">MVC °Ô½ÃÆÇ</td>
+		<td colspan="4">MVC ê²Œì‹œíŒ</td>
 		<td align=right>
-			<font size=2>±Û °³¼ö : ${listcount }</font>
+			<font size=2>ê¸€ ê°œìˆ˜ : ${listcount }</font>
 		</td>
 	</tr>
 	
 	<tr align="center" valign="middle" bordercolor="#333333">
 		<td style="font-family:Tahoma;font-size:8pt;" width="8%" height="26">
-			<div align="center">¹øÈ£</div>
+			<div align="center">ë²ˆí˜¸</div>
 		</td>
 		<td style="font-family:Tahoma;font-size:8pt;" width="50%">
-			<div align="center">Á¦¸ñ</div>
+			<div align="center">ì œëª©</div>
 		</td>
 		<td style="font-family:Tahoma;font-size:8pt;" width="14%">
-			<div align="center">ÀÛ¼ºÀÚ</div>
+			<div align="center">ì‘ì„±ì</div>
 		</td>
 		<td style="font-family:Tahoma;font-size:8pt;" width="17%">
-			<div align="center">³¯Â¥</div>
+			<div align="center">ë‚ ì§œ</div>
 		</td>
 		<td style="font-family:Tahoma;font-size:8pt;" width="11%">
-			<div align="center">Á¶È¸¼ö</div>
+			<div align="center">ì¡°íšŒìˆ˜</div>
 		</td>
 	</tr>
 	
-	<%
-		for(int i=0;i<boardList.size();i++){
-			BoardBean bl=(BoardBean)boardList.get(i);
-	%>
+	<c:forEach var="board" items="${boardlist }">
 	<tr align="center" valign="middle" bordercolor="#333333"
 		onmouseover="this.style.backgroundColor='F8F8F8'"
 		onmouseout="this.style.backgroundColor=''">
 		<td height="23" style="font-family:Tahoma;font-size:10pt;">
-			<%=bl.getBOARD_NUM()%>
+			${board.BOARD_NUM }
 		</td>
 		
 		<td style="font-family:Tahoma;font-size:10pt;">
 			<div align="left">
-			<%if(bl.getBOARD_RE_LEV()!=0){ %>
-				<%for(int a=0;a<=bl.getBOARD_RE_LEV()*2;a++){ %>
-				&nbsp;
-				<%} %>
-				¢º
-			<%}else{ %>
-				¢º
-			<%} %>
-			<a href="./BoardDetailAction.bo?num=<%=bl.getBOARD_NUM()%>">
-				<%=bl.getBOARD_SUBJECT()%>
+			
+			<c:choose>
+				<c:when test="${board.BOARD_RE_LEV != 0 }">
+					<c:forEach begin="0" end="${board.BOARD_RE_LEV*2 }">
+						&nbsp;
+					</c:forEach>
+					â–¶
+				</c:when>
+				<c:otherwise>
+					â–¶
+   				</c:otherwise>
+			</c:choose>
+			<a href="./BoardDetailAction.bo?num=${board.BOARD_NUM }">
+				${board.BOARD_SUBJECT }
 			</a>
 			</div>
 		</td>
 		
 		<td style="font-family:Tahoma;font-size:10pt;">
-			<div align="center"><%=bl.getBOARD_NAME() %></div>
+			<div align="center">${board.BOARD_NAME }</div>
 		</td>
 		<td style="font-family:Tahoma;font-size:10pt;">
-			<div align="center"><%=bl.getBOARD_DATE() %></div>
+			<div align="center">${board.BOARD_DATE }</div>
 		</td>	
 		<td style="font-family:Tahoma;font-size:10pt;">
-			<div align="center"><%=bl.getBOARD_READCOUNT() %></div>
+			<div align="center">${board.BOARD_READCOUNT }</div>
 		</td>
 	</tr>
-	<%} %>
+	</c:forEach>
 	<tr align=center height=20>
 		<td colspan=7 style=font-family:Tahoma;font-size:10pt;>
-			<%if(nowpage<=1){ %>
-			[ÀÌÀü]&nbsp;
-			<%}else{ %>
-			<a href="./BoardList.bo?page=<%=nowpage-1 %>">[ÀÌÀü]</a>&nbsp;
-			<%} %>
+			<c:choose>
+				<c:when test="${page <= 1 }">
+					[ì´ì „]&nbsp;
+				</c:when>
+				<c:otherwise>
+					<a href="./BoardList.bo?page=${page-1 }">[ì´ì „]</a>&nbsp;
+				</c:otherwise>
+			</c:choose>
 			
-			<%for(int a=startpage;a<=endpage;a++){
-				if(a==nowpage){%>
-				[<%=a %>]
-				<%}else{ %>
-				<a href="./BoardList.bo?page=<%=a %>">[<%=a %>]</a>&nbsp;
-				<%} %>
-			<%} %>
+			<c:forEach begin="${startpage }" end="${endpage }">
+				<c:choose>
+					<c:when test="${startpage == page }">
+					[${startpage }]
+					</c:when>
+					<c:otherwise>
+					<a href="./BoardList.bo?page=${startpage }">[${startpage }]</a>&nbsp;
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>	
 			
-			<%if(nowpage>=maxpage){ %>
-			[´ÙÀ½]
-			<%}else{ %>
-			<a href="./BoardList.bo?page=<%=nowpage+1 %>">[´ÙÀ½]</a>
-			<%} %>
+			<c:choose>
+				<c:when test="${page >= maxpage}">
+				[ë‹¤ìŒ]
+				</c:when>
+				<c:otherwise>
+				<a href="./BoardList.bo?page=${page+1 }">[ë‹¤ìŒ]</a>
+				</c:otherwise>
+			</c:choose>		
 		</td>
 	</tr>
 	<tr align="right">
 		<td colspan="5">
-	   		<a href="./BoardWrite.bo">[±Û¾²±â]</a>
+	   		<a href="./BoardWrite.bo">[ê¸€ì“°ê¸°]</a>
 		</td>
 	</tr>
 </table>
