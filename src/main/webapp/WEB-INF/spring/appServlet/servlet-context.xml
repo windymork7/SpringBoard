@@ -24,5 +24,16 @@
 	<context:component-scan base-package="kr.co.Controller" />
 	
 	
+	<!-- Spring-jdbc 설정 -->
+	<beans:bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<beans:property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<beans:property name="url" value="jdbc:oracle:thin:@Localhost:1521:xe"/>
+		<beans:property name="username" value="hr"/>
+		<beans:property name="password" value="hr"/>
+	</beans:bean>
+	
+	<beans:bean name="template" class="org.springframework.jdbc.core.JdbcTemplate">
+		<beans:property name="dataSource" ref="dataSource"/>
+	</beans:bean>
 	
 </beans:beans>
