@@ -95,13 +95,13 @@
 					</c:otherwise>
 				</c:choose>
 				
-				<c:forEach begin="${startpage }" end="${endpage }">
+				<c:forEach var="str" begin="${startpage }" end="${endpage }" step="1">
 					<c:choose>
-						<c:when test="${startpage == page }">
-						[${startpage }]
+						<c:when test="${str == page }">
+							[${str }]
 						</c:when>
 						<c:otherwise>
-						<a href="./BoardList.bo?page=${startpage }">[${startpage }]</a>&nbsp;
+							<a href="./BoardList.bo?page=${str }">[${str }]</a>&nbsp;
 						</c:otherwise>
 					</c:choose>
 				</c:forEach>	
