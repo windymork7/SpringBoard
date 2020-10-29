@@ -47,9 +47,9 @@
 			<div align="center">첨부파일</div>
 		</td>
 		<td style="font-family:돋음; font-size:12">
-		<c:if test="${not empty board.BOARD_FILE}">
+		<%-- <c:if test="${not empty board.BOARD_FILE}">
 			<a href="./boardupload/${boardDTO.BOARD_FILE }>${boardDTO.BOARD_FILE }</a>
-		</c:if>
+		</c:if> --%>
 	</tr>
 	
 	<tr bgcolor="cccccc">

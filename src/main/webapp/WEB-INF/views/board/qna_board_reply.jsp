@@ -1,78 +1,75 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"%>
-<%@ page import="net.board.db.*" %>
-<%
-	BoardDTO board=(BoardDTO)request.getAttribute("boarddata");
-%>
-
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-	<title>MVC °Ô½ÃÆÇ</title>
+	<title>MVC ê²Œì‹œíŒ</title>
 	<script language="javascript">
-	function replyboard(){
+	function replyboard()
+	{
 		boardform.submit();
 	}
 	</script>
 </head>
 <body>
-<!-- °Ô½ÃÆÇ ´äº¯ -->
+<!-- ê²Œì‹œíŒ ë‹µë³€ -->
 <form action="./BoardReplyView.bo" method="post" name="boardform">
-<input type="hidden" name="BOARD_NUM" value="<%=board.getBOARD_NUM() %>">
-<input type="hidden" name="BOARD_RE_REF" value="<%=board.getBOARD_RE_REF() %>">
-<input type="hidden" name="BOARD_RE_LEV" value="<%=board.getBOARD_RE_LEV() %>">
-<input type="hidden" name="BOARD_RE_SEQ" value="<%=board.getBOARD_RE_SEQ() %>">
-
-<table cellpadding="0" cellspacing="0">
-	<tr align="center" valign="middle">
-		<td colspan="5">MVC °Ô½ÃÆÇ</td>
-	</tr>
-	<tr>
-		<td style="font-family:µ¸À½; font-size:12" height="16">
-			<div align="center">±Û¾´ÀÌ</div>
-		</td>
-		<td>
-			<input name="BOARD_NAME" type="text"/>
-		</td>
-	</tr>
-	<tr>
-		<td style="font-family:µ¸À½; font-size:12" height="16">
-			<div align="center">Á¦ ¸ñ</div>
-		</td>
-		<td>
-			<input name="BOARD_SUBJECT" type="text" size="50" 
-				maxlength="100" value="Re: <%=board.getBOARD_SUBJECT() %>"/>
-		</td>
-	</tr>
-	<tr>
-		<td style="font-family:µ¸À½; font-size:12">
-			<div align="center">³» ¿ë</div>
-		</td>
-		<td>
-			<textarea name="BOARD_CONTENT" cols="67" rows="15"></textarea>
-		</td>
-	</tr>
-	<tr>
-		<td style="font-family:µ¸À½; font-size:12">
-			<div align="center">ºñ¹Ğ¹øÈ£</div>
-		</td>
-		<td>
-			<input name="BOARD_PASS" type="password">
-		</td>
-	</tr>
-	
-	<tr bgcolor="cccccc">
-		<td colspan="2" style="height:1px;">
-		</td>
-	</tr>
-	<tr><td colspan="2">&nbsp;</td></tr>
-	
-	<tr align="center" valign="middle">
-		<td colspan="5">
-		<a href="javascript:replyboard()">[µî·Ï]</a>&nbsp;&nbsp;
-		<a href="javascript:history.go(-1)">[µÚ·Î]</a>
-		</td>
-	</tr>
-</table>
+	<input type="hidden" name="BOARD_NUM" value="${boardDTO.BOARD_NUM }">
+	<input type="hidden" name="BOARD_RE_REF" value="${boardDTO.BOARD_RE_REF }">
+	<input type="hidden" name="BOARD_RE_LEV" value="${boardDTO.BOARD_RE_LEV }">
+	<input type="hidden" name="BOARD_RE_SEQ" value="${boardDTO.BOARD_RE_SEQ }">
+	<table cellpadding="0" cellspacing="0">
+		<tr align="center" valign="middle">
+			<td colspan="5">MVC ê²Œì‹œíŒ</td>
+		</tr>
+		<tr>
+			<td style="font-family:ë‹ìŒ; font-size:12" height="16">
+				<div align="center">ê¸€ì“´ì´</div>
+			</td>
+			<td>
+				<input name="BOARD_NAME" type="text"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-family:ë‹ìŒ; font-size:12" height="16">
+				<div align="center">ì œ ëª©</div>
+			</td>
+			<td>
+				<input name="BOARD_SUBJECT" type="text" size="50" 
+					maxlength="100" value="Re: ${boardDTO.BOARD_SUBJECT }"/>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-family:ë‹ìŒ; font-size:12">
+				<div align="center">ë‚´ ìš©</div>
+			</td>
+			<td>
+				<textarea name="BOARD_CONTENT" cols="67" rows="15"></textarea>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-family:ë‹ìŒ; font-size:12">
+				<div align="center">ë¹„ë°€ë²ˆí˜¸</div>
+			</td>
+			<td>
+				<input name="BOARD_PASS" type="password">
+			</td>
+		</tr>
+		
+		<tr bgcolor="cccccc">
+			<td colspan="2" style="height:1px;">
+			</td>
+		</tr>
+		<tr><td colspan="2">&nbsp;</td></tr>
+		
+		<tr align="center" valign="middle">
+			<td colspan="5">
+			<a href="javascript:replyboard()">[ë“±ë¡]</a>&nbsp;&nbsp;
+			<a href="javascript:history.go(-1)">[ë’¤ë¡œ]</a>
+			</td>
+		</tr>
+	</table>
 </form>
-<!-- °Ô½ÃÆÇ ´äº¯ -->
+<!-- ê²Œì‹œíŒ ë‹µë³€ -->
 </body>
 </html>
